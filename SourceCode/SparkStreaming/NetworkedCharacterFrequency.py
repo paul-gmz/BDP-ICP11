@@ -19,11 +19,9 @@ lines = ssc.socketTextStream("localhost", 9999)
 # Split each line into words
 words = lines.flatMap(lambda line: line.split(" "))
 
-# Count each word in each batch
 pairs = words.map(lambda word: (len(word), word))
 wordCounts = pairs.reduceByKey(lambda x, y: x + "," + y)
 
-# Print the first ten elements of each RDD generated in this DStream to the console
 wordCounts.pprint()
 
 ssc.start()
